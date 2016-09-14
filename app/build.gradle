@@ -35,4 +35,5 @@ dependencies {
 
     //GOOGLe
     compile 'com.google.android.gms:play-services-auth:9.0.0'
+    compile 'com.google.android.gms:play-services-maps:9.0.0'
 }
