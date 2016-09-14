@@ -6,7 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.widget.ImageView;
 
-import com.example.rares.raresbook.R;
+
+import com.example.cristianbaita.sampleminimalproject.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,7 +38,7 @@ public class ImageLoader {
 		executorService = Executors.newFixedThreadPool(5);
 	}
 
-	final int stub_id = R.drawable.profile;
+	final int stub_id = R.drawable.facebook;
 
 	public void DisplayImage(String url, ImageView imageView) {
 		imageViews.put(imageView, url);

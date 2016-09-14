@@ -37,9 +37,9 @@ public class InstagramApp {
 	private static int WHAT_FETCH_INFO = 2;
 
 	public static String mCallbackUrl = "";
-	private static final String AUTH_URL = "https://api.com.example.cristianbaita.sampleminimalproject.instagram.com/oauth/authorize/";
-	private static final String TOKEN_URL = "https://api.com.example.cristianbaita.sampleminimalproject.instagram.com/oauth/access_token";
-	private static final String API_URL = "https://api.com.example.cristianbaita.sampleminimalproject.instagram.com/v1";
+	private static final String AUTH_URL = "https://api.instagram.com/oauth/authorize/";
+	private static final String TOKEN_URL = "https://api.instagram.com/oauth/access_token";
+	private static final String API_URL = "https://api.instagram.com/v1";
 
 	private static final String TAG = "InstagramAPI";
 

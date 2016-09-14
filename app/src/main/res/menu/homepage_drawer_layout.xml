@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@mipmap/info"
+            android:title="Chat" />
+    </group>
+
+    <item android:title="Social">
+        <menu>
+            <item
+                android:id="@+id/nav_facebook"
+                android:icon="@mipmap/fb"
+                android:title="Facebook" />
+            <item
+                android:id="@+id/nav_google"
+                android:icon="@mipmap/google"
+                android:title="Google" />
+        </menu>
+    </item>
+
+</menu>

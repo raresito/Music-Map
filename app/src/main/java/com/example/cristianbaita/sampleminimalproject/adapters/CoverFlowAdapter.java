@@ -13,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cristianbaita.sampleminimalproject.R;
+import com.example.cristianbaita.sampleminimalproject.activities.LoginActivity;
 import com.example.cristianbaita.sampleminimalproject.pojo.Game;
+import com.example.cristianbaita.sampleminimalproject.R;
+import com.example.cristianbaita.sampleminimalproject.pojo.GoogleLoginManager;
 
 import java.util.ArrayList;
 
@@ -83,6 +86,13 @@ public class CoverFlowAdapter extends BaseAdapter {
                         Toast.makeText(activity, "Cool", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
+                        LoginActivity loginActivity = (LoginActivity) activity;
+                        if(position == 2)
+                            loginActivity.btnConnect.performClick();
+                        if(position == 0)
+                            loginActivity.signIn();
+                        if(position == 1)
+                            loginActivity.facebookbutton.performClick();
                     }
                 });
                 dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
