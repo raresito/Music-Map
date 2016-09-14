@@ -43,11 +43,6 @@
             android:label="@string/homepage_title" >
         </activity>
 
-        <activity
-            android:name=".activities.HomepageActivity2"
-            android:label="@string/homepage_title" >
-        </activity>
-
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"

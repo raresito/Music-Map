@@ -28,6 +28,15 @@ public class GeoSearchResult {
         return display_address;
     }
 
+
+    public double getLongitude(){
+        return address.getLongitude();
+    }
+
+    public double getLatitude(){
+        return address.getLatitude();
+    }
+
     public String toString(){
         String display_address = "";
 

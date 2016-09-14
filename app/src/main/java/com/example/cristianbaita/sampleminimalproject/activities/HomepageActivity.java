@@ -1,58 +1,106 @@
 package com.example.cristianbaita.sampleminimalproject.activities;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+/**
+ * Created by Rares - Desktop on 13.09.2016.
+ */
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
+import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.cristianbaita.sampleminimalproject.R;
-import com.example.cristianbaita.sampleminimalproject.fragments.AboutFragment;
-import com.example.cristianbaita.sampleminimalproject.helper.ImageLoader;
-import com.example.cristianbaita.sampleminimalproject.instagram.InstagramApp;
+import com.example.cristianbaita.sampleminimalproject.adapters.GeoAutoCompleteAdapter;
+import com.example.cristianbaita.sampleminimalproject.helper.DelayAutoCompleteTextView;
+import com.example.cristianbaita.sampleminimalproject.helper.GeoSearchResult;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.HashMap;
+public class HomepageActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-public class HomepageActivity extends FragmentActivity implements NavigationView.OnNavigationItemSelectedListener{
+    private Integer THRESHOLD = 2;
+    private DelayAutoCompleteTextView geo_autocomplete;
+    private ImageView geo_autocomplete_clear;
+    private Marker TP;
 
-    FragmentTransaction fragmentTransaction;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepage_layout);
+        setContentView(R.layout.homepage);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_homepage);
-        navigationView.setNavigationItemSelectedListener(this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
+        mapFragment.getMapAsync(this);
+        //GoogleMap googleMap = mapFragment.getMap();
+
+        geo_autocomplete_clear = (ImageView) findViewById(R.id.geo_autocomplete_clear);
+
+        geo_autocomplete = (DelayAutoCompleteTextView) findViewById(R.id.geo_autocomplete);
+        geo_autocomplete.setThreshold(THRESHOLD);
+        geo_autocomplete.setAdapter(new GeoAutoCompleteAdapter(this));
+
+        geo_autocomplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                GeoSearchResult result = (GeoSearchResult) adapterView.getItemAtPosition(position);
+                geo_autocomplete.setText(result.getAddress());
+                TP.setPosition(new LatLng(result.getLatitude(), result.getLongitude()));
+                //aici pun markerul
+            }
+        });
+
+        geo_autocomplete.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() > 0)
+                {
+                    geo_autocomplete_clear.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    geo_autocomplete_clear.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        geo_autocomplete_clear.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                geo_autocomplete.setText("");
+            }
+        });
+
     }
 
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if(id == R.id.nav_about)
-        {
-            System.out.println("MErge");
-            AboutFragment aboutFragment = new AboutFragment();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_homepage);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    @Override
+    public void onMapReady(GoogleMap map) {
+    //DO WHATEVER YOU WANT WITH GOOGLEMAP
+        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        final LatLng poz = new LatLng(21 , 57);
+        TP = map.addMarker(new MarkerOptions().position(poz).title("Yeey"));
+        map.setTrafficEnabled(true);
+        map.setIndoorEnabled(true);
+        map.setBuildingsEnabled(true);
+        map.getUiSettings().setZoomControlsEnabled(true);
     }
 }

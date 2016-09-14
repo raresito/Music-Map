@@ -13,9 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -162,7 +159,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 btnConnect.setText("Disconnect");
                 mApp.fetchUserName(handler);
-                Intent intent = new Intent(LoginActivity.this, HomepageActivity2.class);
+                Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
                 saveUser();
                 intent.putExtra("username", getUsername());
                 //final String user = getUsername();
@@ -187,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(btnConnect != null && btnConnect.getText().toString() == "Disconnect")
         {
-            Intent intent = new Intent(LoginActivity.this, HomepageActivity2.class);
+            Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
             intent.putExtra("username", getUsername());
             startActivity(intent);
         }
@@ -202,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         facebookbutton.registerCallback(facebookCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Intent intent = new Intent(LoginActivity.this, HomepageActivity2.class);
+                Intent intent = new Intent(LoginActivity.this, HomepageActivity.class);
 
                 startActivity(intent);
             }

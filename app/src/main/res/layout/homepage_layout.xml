@@ -29,14 +29,7 @@
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
-    <!--
-    <fragment
-        android:name="com.example.fragments"
-        android:id="@+id/lm_fragment"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />
-    -->
+
     <android.support.design.widget.NavigationView
     android:id="@+id/nav_view_homepage"
     android:layout_width="wrap_content"
