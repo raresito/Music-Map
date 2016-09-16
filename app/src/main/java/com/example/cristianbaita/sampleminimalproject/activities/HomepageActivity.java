@@ -16,6 +16,7 @@ import com.example.cristianbaita.sampleminimalproject.R;
 import com.example.cristianbaita.sampleminimalproject.adapters.GeoAutoCompleteAdapter;
 import com.example.cristianbaita.sampleminimalproject.helper.DelayAutoCompleteTextView;
 import com.example.cristianbaita.sampleminimalproject.helper.GeoSearchResult;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,6 +24,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class HomepageActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -37,6 +41,8 @@ public class HomepageActivity extends AppCompatActivity implements OnMapReadyCal
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
+
+        getSupportActionBar().hide();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
@@ -89,6 +95,13 @@ public class HomepageActivity extends AppCompatActivity implements OnMapReadyCal
                 geo_autocomplete.setText("");
             }
         });
+
+        //ADMOB
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-6359225203826206~5906884778");
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
     }
 
